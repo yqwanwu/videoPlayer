@@ -103,9 +103,9 @@ class VideoPlayerControlView: UIView {
     var timePercent: Float = 0.0
     
     fileprivate var origenalFrame: CGRect = CGRect.zero
-
-    fileprivate var topBar: UIView!
-    fileprivate var bottomBar: UIView!
+    
+    var topBar: UIView!
+    var bottomBar: UIView!
     var playButton: UIButton!
     var fullScreenButton: UIButton!
     var progressSlider: UISlider!
@@ -270,7 +270,7 @@ class VideoPlayerControlView: UIView {
         bottomBar.addSubview(playButton)
         bottomBar.addSubview(timeLabel)
         bottomBar.addSubview(fullScreenButton)
-//        bottomBar.addSubview(bufferProgressView)
+        //        bottomBar.addSubview(bufferProgressView)
         bottomBar.addSubview(progressSlider)
         self.addSubview(self.timeIndicatorView)
         self.addSubview(centerPlayPauseBtn!)
@@ -328,8 +328,8 @@ class VideoPlayerControlView: UIView {
                     
                 })
             }
-            }, userInfo: nil, repeats: true)
-
+        }, userInfo: nil, repeats: true)
+        
     }
     
     // MARK: 视频进度监听
@@ -353,7 +353,7 @@ class VideoPlayerControlView: UIView {
                 
             }
             
-            })
+        })
     }
     
     func updateProgressSlider() {
@@ -430,19 +430,19 @@ class VideoPlayerControlView: UIView {
     //MARK: 初始化播放器
     func setupPlayer(url: URL) {
         //在不缓冲的情况下计算时长
-//        let urlAsset = AVURLAsset(url: url, options: [AVURLAssetPreferPreciseDurationAndTimingKey:false])
-//        var allSec = Int32(urlAsset.duration.value) / urlAsset.duration.timescale
-//        let totalMin = Int(allSec / 60)//总分钟
-//        let totalSec = Int(allSec % 60)//总秒
-//        
-//        let str = String(format: "00:00 / %02zd:%02zd", totalMin, totalSec)
-//        let attrStr = NSMutableAttributedString(string: str)
-//        let length = str.components(separatedBy: "/")[0].characters.count
-//        attrStr.addAttributes([NSForegroundColorAttributeName:UIColor.yellow], range: NSRange(location: 0, length: length))
-//        
-//        DispatchQueue.main.async {
-//            self.timeLabel.attributedText = attrStr
-//        }
+        //        let urlAsset = AVURLAsset(url: url, options: [AVURLAssetPreferPreciseDurationAndTimingKey:false])
+        //        var allSec = Int32(urlAsset.duration.value) / urlAsset.duration.timescale
+        //        let totalMin = Int(allSec / 60)//总分钟
+        //        let totalSec = Int(allSec % 60)//总秒
+        //
+        //        let str = String(format: "00:00 / %02zd:%02zd", totalMin, totalSec)
+        //        let attrStr = NSMutableAttributedString(string: str)
+        //        let length = str.components(separatedBy: "/")[0].characters.count
+        //        attrStr.addAttributes([NSForegroundColorAttributeName:UIColor.yellow], range: NSRange(location: 0, length: length))
+        //
+        //        DispatchQueue.main.async {
+        //            self.timeLabel.attributedText = attrStr
+        //        }
         
         self.progressSlider.value = 0
         self.pausePlayer(pause: true)
@@ -515,36 +515,36 @@ class VideoPlayerControlView: UIView {
                     let totalDuration = CMTimeGetSeconds(playerItem.duration)
                     bufferProgressView.setProgress(Float(timeInterval / totalDuration), animated: false)
                     // 缓冲和进度条的值超过0.05自动播放
-//                    if isPauseBySystem && !didEnterBackground && bufferProgressView.progress - progressSlider.value > 0.05 {
-//                        buffEnd = true
-//                        ac_play(sender: playButton)
-//                        if let p = playAction {
-//                            unowned let ws = self
-//                            p(ws)
-//                        } else {
-//                            juhua.stopAnimating()
-//                        }
-//                    } else {
-//                        if bufferProgressView.progress - progressSlider.value > 0.05 {
-//                            buffEnd = true
-////                            if let p = playAction {
-////                                unowned let ws = self
-////                                p(ws)
-////                            } else {
-////                                juhua.stopAnimating()
-////                            }
-//                            
-//                            juhua.stopAnimating()
-//                        } else {
-//                            buffEnd = false
-//                            if let b = buffingAction {
-//                                unowned let ws = self
-//                                b(ws)
-//                            } else {
-//                                juhua.startAnimating()
-//                            }
-//                        }
-//                    }
+                    //                    if isPauseBySystem && !didEnterBackground && bufferProgressView.progress - progressSlider.value > 0.05 {
+                    //                        buffEnd = true
+                    //                        ac_play(sender: playButton)
+                    //                        if let p = playAction {
+                    //                            unowned let ws = self
+                    //                            p(ws)
+                    //                        } else {
+                    //                            juhua.stopAnimating()
+                    //                        }
+                    //                    } else {
+                    //                        if bufferProgressView.progress - progressSlider.value > 0.05 {
+                    //                            buffEnd = true
+                    ////                            if let p = playAction {
+                    ////                                unowned let ws = self
+                    ////                                p(ws)
+                    ////                            } else {
+                    ////                                juhua.stopAnimating()
+                    ////                            }
+                    //
+                    //                            juhua.stopAnimating()
+                    //                        } else {
+                    //                            buffEnd = false
+                    //                            if let b = buffingAction {
+                    //                                unowned let ws = self
+                    //                                b(ws)
+                    //                            } else {
+                    //                                juhua.startAnimating()
+                    //                            }
+                    //                        }
+                    //                    }
                 }
             case "playbackBufferEmpty":
                 if self.playerItem.isPlaybackBufferEmpty {
@@ -564,7 +564,7 @@ class VideoPlayerControlView: UIView {
                 if playerItem.isPlaybackLikelyToKeepUp {
                     if !setupedProgress {
                         progressSlider.value = Float(timePercent)
-//                        seekTo()
+                        //                        seekTo()
                         setupedProgress = true
                     }
                     
@@ -585,7 +585,7 @@ class VideoPlayerControlView: UIView {
                         unowned let ws = self
                         p(ws)
                     }
-
+                    
                     juhua.stopAnimating()
                 }
                 
@@ -595,13 +595,13 @@ class VideoPlayerControlView: UIView {
         }
     }
     
-//    override func observeValue(forKeyPath keyPath: String?, of object: AnyObject?, change: [NSKeyValueChangeKey : AnyObject]?, context: UnsafeMutableRawPointer) {
-//        
-//    }
+    //    override func observeValue(forKeyPath keyPath: String?, of object: AnyObject?, change: [NSKeyValueChangeKey : AnyObject]?, context: UnsafeMutableRawPointer) {
+    //
+    //    }
     
     
     
-
+    
     override class func initialize() {
         UIDevice.current.beginGeneratingDeviceOrientationNotifications()
     }
@@ -713,11 +713,16 @@ class VideoPlayerControlView: UIView {
         playerLayer.frame = bounds
         let margin: CGFloat = 0.0
         let marginTop: CGFloat = 0
-        topBar.frame = CGRect(x: 0, y: 0, width: bounds.width, height: barHeight)
-        bottomBar.frame = CGRect(x: 0, y: bounds.height - barHeight, width: bounds.width, height: barHeight)
+        
+        //防止iphone x 无法点击
+        var marginX: CGFloat = bounds.width > 400 ? 40 : 0
+        var toolbarW = bounds.width > 400 ? bounds.width - marginX * 2 : bounds.width
+        
+        topBar.frame = CGRect(x: marginX, y: 0, width: toolbarW, height: barHeight)
+        bottomBar.frame = CGRect(x: marginX, y: bounds.height - barHeight, width: toolbarW, height: barHeight)
         playButton.frame = CGRect(x: margin, y: 0, width: barHeight, height: barHeight)
-        fullScreenButton.frame = CGRect(x: bounds.width - margin - barHeight, y: 0, width: barHeight, height: barHeight)
-        progressSlider.frame = CGRect(x: playButton.frame.maxX, y: 0, width: bounds.width - playButton.frame.maxX * 2, height: barHeight)
+        fullScreenButton.frame = CGRect(x: toolbarW - margin - barHeight, y: 0, width: barHeight, height: barHeight)
+        progressSlider.frame = CGRect(x: playButton.frame.maxX, y: 0, width: toolbarW - playButton.frame.maxX * 2, height: barHeight)
         titleLabel.frame = CGRect(x: progressSlider.frame.minX, y: barHeight - 20, width: progressSlider.bounds.width, height: 20)
         indicatorView.center = self.center
         backButton.frame = CGRect(x: margin, y: marginTop, width: barHeight, height: barHeight)
@@ -732,11 +737,11 @@ class VideoPlayerControlView: UIView {
         centerPlayPauseBtn?.center = CGPoint(x: bounds.width / 2, y: bounds.height / 2)
         
         if !lockButton.isSelected {
-//            if UIDevice.current.orientation != .portraitUpsideDown {
-//                centerPlayPauseBtn?.transform = CGAffineTransform(scaleX: 2, y: 2)
-//            } else {
-//                centerPlayPauseBtn?.transform = CGAffineTransform.identity
-//            }
+            //            if UIDevice.current.orientation != .portraitUpsideDown {
+            //                centerPlayPauseBtn?.transform = CGAffineTransform(scaleX: 2, y: 2)
+            //            } else {
+            //                centerPlayPauseBtn?.transform = CGAffineTransform.identity
+            //            }
         }
         timeLabel.frame = CGRect(x: progressSlider.frame.minX, y: barHeight - 20, width: progressSlider.frame.width, height: 20)
         self.timeIndicatorView.center = CGPoint(x: frame.width / 2, y: frame.height / 2)
@@ -759,7 +764,7 @@ class VideoPlayerControlView: UIView {
             }
             player.play()
         }
-//        self.bringSubview(toFront: centerPlayPauseBtn!)
+        //        self.bringSubview(toFront: centerPlayPauseBtn!)
     }
     
     
@@ -771,7 +776,7 @@ class VideoPlayerControlView: UIView {
     //MARK: 事件
     func ac_enterBackground() {
         didEnterBackground = true
-//        pausePlayer(pause: true)
+        //        pausePlayer(pause: true)
         if !allowPlayInBackground && playButton.isSelected {
             ac_play(sender: self.playButton)
         }
@@ -853,11 +858,11 @@ class VideoPlayerControlView: UIView {
         }
         centerPlayPauseBtn?.isHidden = playButton.isSelected
         timerCount = 0
-//        self.bringSubview(toFront: centerPlayPauseBtn!)
+        //        self.bringSubview(toFront: centerPlayPauseBtn!)
     }
     
     func ac_progress(sender: UISlider) {
-//        seekTo()
+        //        seekTo()
         player.pause()
         setTimeLableText(by: true)
         progressSliderFocus = true
@@ -1080,7 +1085,7 @@ class VideoPlayerControlView: UIView {
     
     
     
-  //--------------------------------------
+    //--------------------------------------
     
     // MARK: 一些其他的view组件
     ///时间进度
@@ -1190,10 +1195,10 @@ class VideoPlayerControlView: UIView {
         }
         
         static var addedView = false
-//        fileprivate override func observeValue(forKeyPath keyPath: String?, of object: AnyObject?, change: [NSKeyValueChangeKey : AnyObject]?, context: UnsafeMutablePointer<Void>?) {
-//            
-//            
-//        }
+        //        fileprivate override func observeValue(forKeyPath keyPath: String?, of object: AnyObject?, change: [NSKeyValueChangeKey : AnyObject]?, context: UnsafeMutablePointer<Void>?) {
+        //
+        //
+        //        }
         
         fileprivate override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
             if !BrightnessView.addedView {
@@ -1216,7 +1221,7 @@ class VideoPlayerControlView: UIView {
         
         func hideSoundView() {
             if self.alpha == 1.0 {
-                UIView.animate(withDuration: 0.8, animations: { 
+                UIView.animate(withDuration: 0.8, animations: {
                     self.alpha = 0.0
                     
                 })
