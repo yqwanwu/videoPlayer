@@ -711,12 +711,12 @@ class VideoPlayerControlView: UIView {
             return
         }
         playerLayer.frame = bounds
-        let margin: CGFloat = 0.0
+        let margin: CGFloat = bounds.width > 400 ? 40 : 0
         let marginTop: CGFloat = 0
         
         //防止iphone x 无法点击
-        var marginX: CGFloat = bounds.width > 400 ? 40 : 0
-        var toolbarW = bounds.width > 400 ? bounds.width - marginX * 2 : bounds.width
+        let marginX: CGFloat = 0//bounds.width > 400 ? 40 : 0
+        let toolbarW = bounds.width //> 400 ? bounds.width - marginX * 2 : bounds.width
         
         topBar.frame = CGRect(x: marginX, y: 0, width: toolbarW, height: barHeight)
         bottomBar.frame = CGRect(x: marginX, y: bounds.height - barHeight, width: toolbarW, height: barHeight)
